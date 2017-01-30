@@ -15,6 +15,7 @@ package de.braintags.vertx.jomnigate.json.typehandler.handler;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import de.braintags.vertx.jomnigate.annotation.field.Embedded;
@@ -71,11 +72,12 @@ public class ObjectTypeHandler extends AbstractTypeHandler {
       Handler<AsyncResult<ITypeHandlerResult>> resultHandler) {
 
     try {
-      Class<?> targetType;
+      JavaType targetType;
+
       if (cls == null) {
-        targetType = field.getType();
+        targetType = Json.mapper.getTypeFactory().constructType(field.getGenericType());
       } else {
-        targetType = cls;
+        targetType = Json.mapper.getTypeFactory().constructType(cls);
       }
 
       if (!((source instanceof JsonArray) || (source instanceof JsonObject))) {

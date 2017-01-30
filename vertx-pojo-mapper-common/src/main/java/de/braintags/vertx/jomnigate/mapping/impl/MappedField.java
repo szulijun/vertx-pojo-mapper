@@ -623,4 +623,9 @@ public class MappedField implements IField {
   public void setEncoder(IEncoder encoder) {
     this.encoder = encoder;
   }
+
+  @Override
+  public Type getGenericType() {
+    return genericType;
+  }
 }
