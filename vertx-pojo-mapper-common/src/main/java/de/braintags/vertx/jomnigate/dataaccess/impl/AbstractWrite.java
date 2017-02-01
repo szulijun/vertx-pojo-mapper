@@ -114,13 +114,9 @@ public abstract class AbstractWrite<T> extends AbstractDataAccessObject<T> imple
    *          the handler to be informed
    */
   protected void setIdValue(Object id, IStoreObject<T, ?> storeObject, Handler<AsyncResult<Void>> resultHandler) {
-    try {
-      IField idField = getMapper().getIdField();
-      storeObject.put(idField, id);
-      idField.getPropertyMapper().fromStoreObject(storeObject.getEntity(), storeObject, idField, resultHandler);
-    } catch (Exception e) {
-      resultHandler.handle(Future.failedFuture(e));
-    }
+    IField idField = getMapper().getIdField();
+    storeObject.put(idField, id);
+    idField.getPropertyMapper().fromStoreObject(storeObject.getEntity(), storeObject, idField, resultHandler);
   }
 
   /*
