@@ -64,8 +64,8 @@ public class DefaultPropertyMapper implements IPropertyMapper {
    * @param handler
    *          the handler to be informed
    */
-  public static <T> void intoStoreObject(IStoreObject<T, ? > storeObject, IField field, ITypeHandler th,
-      Handler<AsyncResult<Void>> handler) {
+  public static <T> void intoStoreObject(IStoreObject<T, ?> storeObject, IField field, ITypeHandler th,
+      Object javaValue, Handler<AsyncResult<Void>> handler) {
     LOGGER.debug(
         "starting intoStoreObject for field " + field.getFullName() + " with typehandler " + th.getClass().getName());
     th.intoStore(javaValue, field, result -> {
